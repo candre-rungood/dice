@@ -8,7 +8,7 @@ NUM_DICES = 5
 REWARD_WIN = 25
 REWARD_LOSE = -100
 REWARD_ACTION = -1
-REWARD_INVALIDE = -200 # if IA take invalid action
+REWARD_INVALID = -200 # if IA take invalid action
 
 
 class Player():
@@ -164,7 +164,7 @@ if __name__ == '__main__':
                 # action non valide.
                 print ('non valide')
                 counter_error += 1
-                reward = REWARD_INVALIDE
+                reward = REWARD_INVALID
                 done = False
                 score[counter_player] += reward
                 ddqn_agent[counter_player].remember(player_obs, action, reward, player_obs, int(done))
