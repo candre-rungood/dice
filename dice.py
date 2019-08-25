@@ -1,6 +1,6 @@
 import time
 import numpy as np
-import ddqn_keras
+import ddqnkeras
 import json
 
 NUM_PLAYERS = 2 
@@ -123,17 +123,17 @@ class Game():
 if __name__ == '__main__':
     env = Game()
 
-    ddqn_agent_player0 = ddqn_keras.DDQNAgent(alpha=0.0005, gamma=0.99, n_actions=6*8+1, epsilon=1,
+    ddqn_agent_player0 = ddqnkeras.DDQNAgent(alpha=0.0005, gamma=0.99, n_actions=6*8+1, epsilon=1,
                   batch_size=64, input_dims=6*8+1+6, fname='models/player0')
     #ddqn_agent_player0.load_model(1000000)
 
 
-    ddqn_agent_player1 = ddqn_keras.DDQNAgent(alpha=0.0005, gamma=0.99, n_actions=6*8+1, epsilon=1,
+    ddqn_agent_player1 = ddqnkeras.DDQNAgent(alpha=0.0005, gamma=0.99, n_actions=6*8+1, epsilon=1,
                   batch_size=64, input_dims=6*8+1+6, fname='models/player1')
     #ddqn_agent_player1.load_model()
     
     ddqn_agent = [ddqn_agent_player0, ddqn_agent_player1]
-    n_games = 100000
+    n_games = 1000
     ddqn_scores = []
     eps_history = []
 
