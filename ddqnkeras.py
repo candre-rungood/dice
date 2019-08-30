@@ -56,7 +56,7 @@ def build_dqn(lr, n_actions, input_dims, fc1_dims, fc2_dims):
 
 class DDQNAgent(object):
     def __init__(self, alpha, gamma, n_actions, epsilon, batch_size,
-                 input_dims, epsilon_dec=0.996,  epsilon_end=0.01,
+                 input_dims, epsilon_dec=0.996,  epsilon_end=0.02,
                  mem_size=1000000, fname='ddqn_model.h5', replace_target=100):
         self.action_space = [i for i in range(n_actions)]
         self.n_actions = n_actions
@@ -76,17 +76,20 @@ class DDQNAgent(object):
         self.memory.store_transition(state, action, reward, new_state, done)
 
     def choose_action(self, state):
+
         state = state[np.newaxis, :]
         rand = np.random.random()
         if rand < self.epsilon:
             action = np.random.choice(self.action_space)
+            random_or_dql = 'R'
             print ('random action')
         else:
-            actions = self.q_eval.predict(state)
+            actions = self.q_eval.predict(state) # bug multiprocessing
             action = np.argmax(actions)
+            random_or_dql = 'D'
             print ('DQL action')
 
-        return action
+        return action, random_or_dql
 
     def learn(self):
         if self.memory.mem_cntr > self.batch_size:
