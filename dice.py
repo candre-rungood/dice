@@ -138,6 +138,8 @@ class Game():
 
 
 	def get_reward(self, counter_player):
+		# return reward
+		# for losses its bigger the further away from real result
 		if not self.is_finished():
 			reward = REWARD_ACTION
 		else:
@@ -150,9 +152,9 @@ class Game():
 			# which player won
 			if counter_player==len(self.previous_actions)%2:
 				#print ('c0', result)
-				reward = REWARD_LOSE if result < n else REWARD_WIN
+				reward =  (n-result)*REWARD_LOSE if result < n else REWARD_WIN
 			else:
-				reward = REWARD_WIN if result < n else REWARD_LOSE
+				reward = REWARD_WIN if result < n else (n-result)*REWARD_LOSE
 				#print ('c1', result)
 
 		return reward
