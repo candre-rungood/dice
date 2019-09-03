@@ -154,7 +154,7 @@ class Game():
 				#print ('c0', result)
 				reward =  (n-result)*REWARD_LOSE if result < n else REWARD_WIN
 			else:
-				reward = REWARD_WIN if result <= n else (result-n)*REWARD_LOSE
+				reward = REWARD_WIN if result < n else (result-n+1)*REWARD_LOSE
 				#print ('c1', result)
 
 		return reward
