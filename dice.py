@@ -89,7 +89,7 @@ class Game():
 		self.player0 = self.create_player('Player0')
 		self.player1 = self.create_player('Player1')
 		self.players = [self.player0, self.player1]
-		#print ('Player0', self.player0.dice)
+		print ('Player0', self.player0.dice)
 		print ('Player1', self.player1.dice_humanreadable)
 
 		if self.counter_games%self.n_save == 0:
