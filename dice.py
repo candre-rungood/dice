@@ -52,20 +52,21 @@ class Game():
 					'dice2': [int(x) for x in self.players[1].dice],
 					'actions': [(int(n), int(d)) for (n, d) in self.previous_actions],
 					'r_or_q': [x for x in random_or_dql_list],
-					'reward_player1': self.get_reward(0),
-					'counter_error': counter_error
+					'reward_player1': float(self.get_reward(0)),
+					'reward_player2': float(self.get_reward(1)),
+					'counter_error': int(counter_error)
 				}}
 		self.data_game_history.update(data)
 
 	def save_game_history(self):
 		try:
-			with open(f'data_{self.start_time}.json') as f:
+			with open(f'data_{str(self.start_time)}.json') as f:
 				data_ = json.load(f)
 				data_.update(self.data_game_history)
 		except Exception as e:
 			data_ = self.data_game_history
 
-		with open(f'data_{self.start_time}.json', 'w', encoding='utf-8') as f:
+		with open(f'data_{str(self.start_time)}.json', 'w', encoding='utf-8') as f:
 			json.dump(data_, f, ensure_ascii=False, indent=4) #
 
 		self.data_game_history = {}
@@ -253,7 +254,7 @@ def start_game(i):
 	return
 
 if __name__ == '__main__':
-	env = Game(n_save=500000)
+	env = Game(n_save=100)
 
 	ddqn_agent_player0 = ddqnkeras.DDQNAgent(alpha=0.0005, gamma=0.99, n_actions=6*8+1, epsilon=1,
 				  batch_size=64, input_dims=6*8+1+6, fname='models/player0')
@@ -265,7 +266,7 @@ if __name__ == '__main__':
 	ddqn_agent_player1.load_model(1000000)
 
 	ddqn_agent = [ddqn_agent_player0, ddqn_agent_player1]
-	n_games = 5000001
+	n_games = 1001
 	ddqn_scores = []
 	eps_history = []
 
