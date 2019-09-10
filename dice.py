@@ -254,19 +254,19 @@ def start_game(i):
 	return
 
 if __name__ == '__main__':
-	env = Game(n_save=100)
+	env = Game(n_save=100000)
 
 	ddqn_agent_player0 = ddqnkeras.DDQNAgent(alpha=0.0005, gamma=0.99, n_actions=6*8+1, epsilon=1,
 				  batch_size=64, input_dims=6*8+1+6, fname='models/player0')
-	ddqn_agent_player0.load_model(1000000)
+	ddqn_agent_player0.load_model(5500000)
 
 
 	ddqn_agent_player1 = ddqnkeras.DDQNAgent(alpha=0.0005, gamma=0.99, n_actions=6*8+1, epsilon=1,
 				  batch_size=64, input_dims=6*8+1+6, fname='models/player1')
-	ddqn_agent_player1.load_model(1000000)
+	ddqn_agent_player1.load_model(5500000)
 
 	ddqn_agent = [ddqn_agent_player0, ddqn_agent_player1]
-	n_games = 1001
+	n_games = 10000001
 	ddqn_scores = []
 	eps_history = []
 
